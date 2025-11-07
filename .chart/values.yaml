@@ -34,13 +34,13 @@ deployment:
         valueFrom:
           secretKeyRef:
             name: rabbitmq
-            value: RABBITMQ_DEFAULT_USER
+            key: RABBITMQ_DEFAULT_USER
 
       - name: RABBITMQ_DEFAULT_PASS  
         valueFrom:
           secretKeyRef:
             name: rabbitmq
-            value: RABBITMQ_DEFAULT_PASS 
+            key: RABBITMQ_DEFAULT_PASS 
 
 service:
   name: rabbitmq-service
@@ -55,7 +55,7 @@ service:
   - name: http-management
     port: 15672
     targetPort: 15672
-    
+
   - name: tcp-epmd
     port: 4369
     targetPort: 4369

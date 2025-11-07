@@ -1,0 +1,61 @@
+labels:
+  app: Rabbitmq
+  project: Robot-Shop
+  technology: Rabbitmq
+  environment: default 
+
+deployment:
+  name: rabbitmq
+
+  replicas: 1
+
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+
+  pod:
+    nodeSelector:
+      project: Robot-Shop
+
+    containers:  
+    - name: rabbitmq
+
+      image: ${IMAGE}  # <-- placeholder
+
+      imagePullPolicy: Always
+
+      ports:
+      - containerPort: 5672
+      - containerPort: 15672
+
+      env:
+      - name: RABBITMQ_DEFAULT_USER 
+        valueFrom:
+          secretKeyRef:
+            name: rabbitmq
+            value: RABBITMQ_DEFAULT_USER
+
+      - name: RABBITMQ_DEFAULT_PASS  
+        valueFrom:
+          secretKeyRef:
+            name: rabbitmq
+            value: RABBITMQ_DEFAULT_PASS 
+
+service:
+  name: rabbitmq-service
+
+  type: ClusterIP
+
+  ports:
+  - name: tcp-amqp
+    port: 5672
+    targetPort: 5672
+
+  - name: http-management
+    port: 15672
+    targetPort: 15672
+    
+  - name: tcp-epmd
+    port: 4369
+    targetPort: 4369

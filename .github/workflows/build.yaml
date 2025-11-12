@@ -9,6 +9,8 @@ on:
     branches:
       - develop
 
+  workflow_dispatch:
+
 env:
   REGISTRY_NAME: robotshopdevacr
   REGISTRY_URL: robotshopdevacr.azurecr.io

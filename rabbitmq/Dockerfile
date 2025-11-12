@@ -1,0 +1,1 @@
+FROM robotshopdevacr.azurecr.io/baseimages/rabbitmq:4.2.0-internal

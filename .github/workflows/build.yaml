@@ -2,8 +2,8 @@ name: Build and Deploy rabbitmq database to Development
 
 on:
   push:
-    branches:
-      - '**'   
+    branches-ignore:
+      - main  
 
   pull_request:
     branches:
